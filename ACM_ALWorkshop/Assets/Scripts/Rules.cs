@@ -11,4 +11,5 @@ public class Rules : MonoBehaviour
     public float bTB;
     public float yTY;
     public float oTO;
+    public float randomForce;
 }

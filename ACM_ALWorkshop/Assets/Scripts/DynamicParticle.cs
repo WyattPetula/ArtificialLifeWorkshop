@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DynamicParticle : MonoBehaviour
 {
-    public float ship_force_add = 1.3f;
     public float relationshipForce;
     public string identifier;
 
@@ -25,6 +24,7 @@ public class DynamicParticle : MonoBehaviour
     void FixedUpdate()
     {
         DynamicParticle[] dynamicBodiesArray = FindObjectsByType<DynamicParticle>(FindObjectsSortMode.None);
+        rb2D.AddForce(new Vector2(Random.Range(-rules.randomForce, rules.randomForce), Random.Range(-rules.randomForce, rules.randomForce)));
 
         foreach (DynamicParticle dp in dynamicBodiesArray)
         {
@@ -32,10 +32,10 @@ public class DynamicParticle : MonoBehaviour
                 continue;
 
             float forceStrength = 0;
-            switch (identifier)
+            switch (dp.tag)
             {
                 case "Blue":
-                    switch (dp.tag)
+                    switch (identifier)
                     {
                         case "Blue": forceStrength = rules.bTB; break;
                         case "Yellow": forceStrength = rules.bTY; break;
@@ -43,7 +43,7 @@ public class DynamicParticle : MonoBehaviour
                     }
                     break;
                 case "Yellow":
-                    switch (dp.tag)
+                    switch (identifier)
                     {
                         case "Blue": forceStrength = rules.yTB; break;
                         case "Yellow": forceStrength = rules.yTY; break;
@@ -51,7 +51,7 @@ public class DynamicParticle : MonoBehaviour
                     }
                     break;
                 case "Orange":
-                    switch (dp.tag)
+                    switch (identifier)
                     {
                         case "Blue": forceStrength = rules.oTB; break;
                         case "Yellow": forceStrength = rules.oTY; break;
@@ -60,19 +60,15 @@ public class DynamicParticle : MonoBehaviour
                     break;
             }
 
-            if (forceStrength == 0)
-                forceStrength = rules.oTB;
-
             Attract(dp, forceStrength);
         }
     }
 
     void Attract(DynamicParticle objectToAttract, float forceStrength)
     {
-        if (forceStrength == 0)
-        return;
-
         Rigidbody2D rb2DToAttract = objectToAttract.rb2D;
-        rb2DToAttract.AddForce((rb2D.position - rb2DToAttract.position).normalized * forceStrength);
+        float distance = (rb2D.position - rb2DToAttract.position).magnitude;
+        if(distance != 0)
+            rb2DToAttract.AddForce((rb2D.position - rb2DToAttract.position).normalized * forceStrength / distance, ForceMode2D.Force);
     }
 }

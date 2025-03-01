@@ -16,44 +16,43 @@ public class DynamicParticle : MonoBehaviour
     {
         identifier = gameObject.tag;
         rules = GameObject.Find("Rules").GetComponent<Rules>();
+        rb2D = gameObject.GetComponent<Rigidbody2D>();
     }
     
     void FixedUpdate()
     {
-        if(!Input.GetKey(KeyCode.Space)){
-            DynamicParticle[] dynamicBodiesArray = FindObjectsByType<DynamicParticle>(FindObjectsSortMode.None);
+        DynamicParticle[] dynamicBodiesArray = FindObjectsByType<DynamicParticle>(FindObjectsSortMode.None);
 
-            // Yes, this code is unoptimized. No, I don't have time to fix it.
-            foreach (DynamicParticle DynamicParticle in dynamicBodiesArray)
-            {
-                if (DynamicParticle == this) continue;
-                
-                if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Blue"))
-                    Attract(DynamicParticle, rules.bTB);
+        // Yes, this code is unoptimized. No, I don't have time to fix it.
+        foreach (DynamicParticle DynamicParticle in dynamicBodiesArray)
+        {
+            if (DynamicParticle == this) continue;
+            
+            if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Blue"))
+                Attract(DynamicParticle, rules.bTB);
 
-                else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Yellow"))
-                    Attract(DynamicParticle, rules.yTY);
-                
-                else if(identifier.Equals("Orange") && DynamicParticle.tag.Equals("Orange"))
-                    Attract(DynamicParticle, rules.oTO);
+            else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Yellow"))
+                Attract(DynamicParticle, rules.yTY);
+            
+            else if(identifier.Equals("Orange") && DynamicParticle.tag.Equals("Orange"))
+                Attract(DynamicParticle, rules.oTO);
 
-                else if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Yellow"))
-                    Attract(DynamicParticle, rules.bTY);
+            else if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Yellow"))
+                Attract(DynamicParticle, rules.bTY);
 
-                else if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Orange"))
-                    Attract(DynamicParticle, rules.bTO);
+            else if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Orange"))
+                Attract(DynamicParticle, rules.bTO);
 
-                else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Blue"))
-                    Attract(DynamicParticle, rules.yTB);
+            else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Blue"))
+                Attract(DynamicParticle, rules.yTB);
 
-                else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Orange"))
-                    Attract(DynamicParticle, rules.yTO);
+            else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Orange"))
+                Attract(DynamicParticle, rules.yTO);
 
-                else if(identifier.Equals("Orange") && DynamicParticle.tag.Equals("Yellow"))
-                    Attract(DynamicParticle, rules.oTY);
-                
-                else Attract(DynamicParticle, rules.oTB);
-            }
+            else if(identifier.Equals("Orange") && DynamicParticle.tag.Equals("Yellow"))
+                Attract(DynamicParticle, rules.oTY);
+            
+            else Attract(DynamicParticle, rules.oTB);
         }
     }
 

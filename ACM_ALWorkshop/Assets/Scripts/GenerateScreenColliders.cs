@@ -3,18 +3,13 @@ using UnityEngine;
 public class GenerateScreenColliders : MonoBehaviour
 {
     Camera cameraMain;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void Awake()
     {
         cameraMain = Camera.main;
         GenerateCollidersAcrossScreen();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void GenerateCollidersAcrossScreen()
     {
         Vector2 lDCorner = cameraMain.ViewportToWorldPoint(new Vector3(0, 0f, cameraMain.nearClipPlane));

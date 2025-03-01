@@ -12,57 +12,67 @@ public class DynamicParticle : MonoBehaviour
     Rules rules;
 
     public Rigidbody2D rb2D;
+    void Awake()
+    {
+        rb2D = gameObject.GetComponent<Rigidbody2D>();
+    }
     void Start()
     {
         identifier = gameObject.tag;
         rules = GameObject.Find("Rules").GetComponent<Rules>();
-        rb2D = gameObject.GetComponent<Rigidbody2D>();
     }
     
     void FixedUpdate()
     {
         DynamicParticle[] dynamicBodiesArray = FindObjectsByType<DynamicParticle>(FindObjectsSortMode.None);
 
-        // Yes, this code is unoptimized. No, I don't have time to fix it.
-        foreach (DynamicParticle DynamicParticle in dynamicBodiesArray)
+        foreach (DynamicParticle dp in dynamicBodiesArray)
         {
-            if (DynamicParticle == this) continue;
-            
-            if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Blue"))
-                Attract(DynamicParticle, rules.bTB);
+            if (dp == this)
+                continue;
 
-            else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Yellow"))
-                Attract(DynamicParticle, rules.yTY);
-            
-            else if(identifier.Equals("Orange") && DynamicParticle.tag.Equals("Orange"))
-                Attract(DynamicParticle, rules.oTO);
+            float forceStrength = 0;
+            switch (identifier)
+            {
+                case "Blue":
+                    switch (dp.tag)
+                    {
+                        case "Blue": forceStrength = rules.bTB; break;
+                        case "Yellow": forceStrength = rules.bTY; break;
+                        case "Orange": forceStrength = rules.bTO; break;
+                    }
+                    break;
+                case "Yellow":
+                    switch (dp.tag)
+                    {
+                        case "Blue": forceStrength = rules.yTB; break;
+                        case "Yellow": forceStrength = rules.yTY; break;
+                        case "Orange": forceStrength = rules.yTO; break;
+                    }
+                    break;
+                case "Orange":
+                    switch (dp.tag)
+                    {
+                        case "Blue": forceStrength = rules.oTB; break;
+                        case "Yellow": forceStrength = rules.oTY; break;
+                        case "Orange": forceStrength = rules.oTO; break;
+                    }
+                    break;
+            }
 
-            else if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Yellow"))
-                Attract(DynamicParticle, rules.bTY);
+            if (forceStrength == 0)
+                forceStrength = rules.oTB;
 
-            else if(identifier.Equals("Blue") && DynamicParticle.tag.Equals("Orange"))
-                Attract(DynamicParticle, rules.bTO);
-
-            else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Blue"))
-                Attract(DynamicParticle, rules.yTB);
-
-            else if(identifier.Equals("Yellow") && DynamicParticle.tag.Equals("Orange"))
-                Attract(DynamicParticle, rules.yTO);
-
-            else if(identifier.Equals("Orange") && DynamicParticle.tag.Equals("Yellow"))
-                Attract(DynamicParticle, rules.oTY);
-            
-            else Attract(DynamicParticle, rules.oTB);
+            Attract(dp, forceStrength);
         }
     }
 
     void Attract(DynamicParticle objectToAttract, float forceStrength)
     {
-        if(forceStrength != 0){
-            Rigidbody2D rb2DToAttract = objectToAttract.rb2D;
-            Vector2 direction = (rb2D.position - rb2DToAttract.position).normalized;
-            Vector2 force = direction * forceStrength;
-            rb2DToAttract.AddForce(force);
-        }
+        if (forceStrength == 0)
+        return;
+
+        Rigidbody2D rb2DToAttract = objectToAttract.rb2D;
+        rb2DToAttract.AddForce((rb2D.position - rb2DToAttract.position).normalized * forceStrength);
     }
 }

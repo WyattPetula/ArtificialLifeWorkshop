@@ -13,15 +13,15 @@ public class Instantiator : MonoBehaviour
     {
         if(blueParticles > 0){
             for(int i = 0; i < blueParticles; i++)
-                Instantiate(bluePrefab, transform.position, Quaternion.identity);
+                Instantiate(bluePrefab, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
         }
         if(yellowParticles > 0){
             for(int i = 0; i < yellowParticles; i++)
-                Instantiate(yellowPrefab, transform.position, Quaternion.identity);
+                Instantiate(yellowPrefab, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
         }
         if(orangeParticles > 0){
             for(int i = 0; i < orangeParticles; i++)
-                Instantiate(orangePrefab, transform.position, Quaternion.identity);
+                Instantiate(orangePrefab, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
         }
     }
 }

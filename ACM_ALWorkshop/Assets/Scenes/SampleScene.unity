@@ -383,15 +383,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ad9c917fe90fc4794bee1f371806d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bTY: 0
-  bTO: 0
-  yTB: 0
-  yTO: 0
-  oTB: 0
-  oTY: 0
-  bTB: 0
-  yTY: 0
-  oTO: 0
+  bTB: -0.1
+  bTY: 0.4
+  bTO: -1
+  bTP: -1
+  yTB: 0.2
+  yTY: -0.1
+  yTO: 0.2
+  yTP: 0.2
+  oTB: -1
+  oTY: 0.4
+  oTO: -0.1
+  oTP: -1
+  pTB: -1
+  pTY: 0.4
+  pTO: -1
+  pTP: -0.1
   randomForce: 1
 --- !u!4 &784667482
 Transform:
@@ -420,12 +427,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72995266122aa489b28788ab103605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueParticles: 50
-  yellowParticles: 50
-  orangeParticles: 50
+  blueParticles: 35
+  yellowParticles: 35
+  orangeParticles: 35
+  purpleParticles: 35
   bluePrefab: {fileID: 7568646210065307750, guid: d3ad2b29570d91a4e9ec407d6afbb4d2, type: 3}
   yellowPrefab: {fileID: 83925889707632415, guid: 88518271bcffb3a4e9803577c5cbf841, type: 3}
   orangePrefab: {fileID: 5877698468548846105, guid: c07156189b972ab449a436af2b6ef1bd, type: 3}
+  purplePrefab: {fileID: 1118986408585463011, guid: 21e328de0eef65042b3278b9b09163de, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

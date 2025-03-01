@@ -40,6 +40,7 @@ public class DynamicParticle : MonoBehaviour
                         case "Blue": forceStrength = rules.bTB; break;
                         case "Yellow": forceStrength = rules.bTY; break;
                         case "Orange": forceStrength = rules.bTO; break;
+                        case "Purple": forceStrength = rules.bTP; break;
                     }
                     break;
                 case "Yellow":
@@ -48,6 +49,7 @@ public class DynamicParticle : MonoBehaviour
                         case "Blue": forceStrength = rules.yTB; break;
                         case "Yellow": forceStrength = rules.yTY; break;
                         case "Orange": forceStrength = rules.yTO; break;
+                        case "Purple": forceStrength = rules.yTP; break;
                     }
                     break;
                 case "Orange":
@@ -56,6 +58,16 @@ public class DynamicParticle : MonoBehaviour
                         case "Blue": forceStrength = rules.oTB; break;
                         case "Yellow": forceStrength = rules.oTY; break;
                         case "Orange": forceStrength = rules.oTO; break;
+                        case "Purple": forceStrength = rules.oTP; break;
+                    }
+                    break;
+                case "Purple":
+                    switch (identifier)
+                    {
+                        case "Blue": forceStrength = rules.pTB; break;
+                        case "Yellow": forceStrength = rules.pTY; break;
+                        case "Orange": forceStrength = rules.pTO; break;
+                        case "Purple": forceStrength = rules.pTP; break;
                     }
                     break;
             }
